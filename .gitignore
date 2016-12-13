@@ -1,7 +1,7 @@
 *#*
 *~
 aws_credentials.tf
-rds_credentials.tf
+database_credentials.tf
 .terraform
 terraform.tfstate*
 aws.pem*
