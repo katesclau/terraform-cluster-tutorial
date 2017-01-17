@@ -13,3 +13,6 @@ variable "key_pair_name" {}
 variable "cluster_min_size" { default = 1 }
 variable "cluster_max_size" { default = 4 }
 variable "cluster_size" { default = 2 }
+
+variable "high_threshold" {}
+variable "low_threshold" {}

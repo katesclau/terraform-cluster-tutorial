@@ -3,13 +3,17 @@
 # Location and Network =====================================
 variable "region" { default = "us-west-2" } # Oregon
 variable "cluster_name" { default = "cluster-tut" }
-variable "vpc_sg_ids" { default = "" }   
 variable "sg_name" { default = "" } 
 variable "availability_zone" { default = "us-west-2a" }
+variable "subnet_id" { default = "subnet-00446776" }
+variable "vpc_sg_ids" { default = "sg-b3a031ca" }   
 
 # ASG Pool and Launch Configuration=========================
 variable "ami" { default = "ami-a9d276c9" } # Ubuntu Server 16.04 LTS (HVM)
 variable "instance_type" { default = "t2.micro" } # Free tier
+
+variable "high_threshold" { default = "90" } # 90%
+variable "low_threshold" { default = "20" } # 20%
 
 # Keypair ==================================================
 variable "key_name" { default = "aws_access" } 
@@ -41,3 +45,16 @@ variable "db_name" { default = "base" }
 # Name
 variable "elb_name" { default = "cluster-tut-elb" }
 
+# SSL
+#variable "cert_file" { default = "${file("./cert.pem")}" }
+#variable "key_file" { default = "${file("./key.pem")}" }
+variable "cert_file" { default = "" }
+variable "key_file" { default = "" }
+
+# Session Cookie
+variable "session_cookie" { default = "MYSESSIONID" }
+
+# EFS ======================================================
+
+# Name
+variable "efs_name" { default = "cluster-tut-efs" }

@@ -6,6 +6,7 @@ provider "aws" {
   region     = "${var.region}"
 }
 
+# EC2 Instances 
 module "cluster" {
   source = "./ec2"
 
@@ -21,6 +22,10 @@ module "cluster" {
 
   # From load balancer module
   load_balancer = "${module.load_balancer.elb_name}"
+
+  # Scaling policy thresholds
+  high_threshold = "${var.high_threshold}"
+  low_threshold = "${var.low_threshold}"
 }
 
 module "keys" {
@@ -30,7 +35,7 @@ module "keys" {
   public_key = "${var.public_key}"
 }
 
-# MySQL
+# MariaDB
 module "database" {
   source = "./rds"
  
@@ -57,6 +62,19 @@ module "load_balancer" {
  
   availability_zone = "${var.availability_zone}"
   elb_name = "${var.elb_name}"
+
+  cert_file = "${var.cert_file}"
+  key_file = "${var.key_file}"
+
+  session_cookie = "${var.session_cookie}"
 }
 
+# EFS
+module "filesystem" {
+  source = "./efs"
+  
+  efs_name = "${var.efs_name}"
+  vpc_sg_ids = "${var.vpc_sg_ids}"
+  subnet_id = "${var.subnet_id}"
+}
 
